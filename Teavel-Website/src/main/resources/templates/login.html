@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<title>ログイン画面</title>
+<meta charset="UTF-8">
+<title>ログイン画面</title>
 </head>
-
 <body>
-	<!-- ログインエラーのときはメッセージを表示 -->
- 	<div th:if="${failureMessage != null}" th:text="${failureMessage}"></div>
-	<form method="POST" th:object="${LoginForm}">
-		<div>
-			<label>名前:</label>
-			<input type="text" name="name"><br>
-			<input th:if="${name}" type="hidden" th:field="*{name}">
-			<label>password :</label>
-			<input type="text" password="password"><br>
-			<input th:if="${password}" type="hidden" th:field="*{password}">
-			<input type="submit" value="sign in">
-		</div>
-	</form>
+ <!-- ログインエラーのときはメッセージを表示 -->
+ <div th:if="${failureMessage != null}" th:text="${failureMessage}"></div>
+ <!-- ログインフォーム -->
+ <!-- th:action は SecurityConfig の loginProcessingUrl で指定した URL -->
+ <form th:action="@{/login}" method="post">
+ <table>
+ <tr>
+ <th>USERNAME</th>
+ <td><input type="text" name="username" /></td>
+ </tr>
+ <tr>
+ <th>PASSWORD</th>
+ <td><input type="password" name="password" /></td>
+ </tr>
+ </table>
+ <input type="submit" value="login" /><br>
+ <input type="submit" value="sign up" /><br>
+ </form>
 </body>
-
 </html>

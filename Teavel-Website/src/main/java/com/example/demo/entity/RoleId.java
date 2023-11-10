@@ -1,4 +1,4 @@
-package com.example.demo.Entity;
+package com.example.demo.entity;
 
 import org.springframework.data.annotation.Id;
 
@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Role_id {
+public class RoleId {
 	@Id
 	private Integer id;
 	private String name;

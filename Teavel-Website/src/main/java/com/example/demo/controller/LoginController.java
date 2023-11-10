@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +11,10 @@ public class LoginController {
 	public String loginview() {
 		return "login";
 	}
-	// SecurityConfig の failureUrl で指定した URL と?のうしろのパラメータ
-	@GetMapping(value="/login", params="failure")
+	// SecurityConfig のfailureUrl で指定した URL と?のうしろのパラメータ
+	@GetMapping(value="/login", params="error")
 	public String loginFail(Model model) {
-	model.addAttribute("failureMessage", "ログインに失敗しました");
+	model.addAttribute("errorMessage", "ログインに失敗しました");
 	// ログイン画面を表示
 	return "login";
 	}
