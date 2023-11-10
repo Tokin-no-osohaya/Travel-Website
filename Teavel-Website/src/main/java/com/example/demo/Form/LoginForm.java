@@ -1,4 +1,4 @@
-package com.example.demo.LoginForm;
+package com.example.demo.Form;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class LoginForm {
 	/** 識別ID */
 	@NotNull
-	private Integer id;
+	private String name;
 	/** password */
 	@NotNull
 	private String password;
