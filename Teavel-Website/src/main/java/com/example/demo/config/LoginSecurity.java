@@ -13,39 +13,40 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class LoginSecurity {
-    @Bean
-    DefaultSecurityFilterChain signinSecurity(HttpSecurity http) throws Exception{
+	@Bean
+	DefaultSecurityFilterChain signinSecurity(HttpSecurity http) throws Exception {
 		http
-		.formLogin(form -> form
-			//ログイン処理のパス
-			.loginProcessingUrl("/login")
-			//ログインページ
-			.loginPage("/login")
-			//ログインエラー時の遷移先
-			.failureUrl("/login?error")
-			//ログイン成功時の遷移先
-			.defaultSuccessUrl("/menu",true)
-			//ログイン時のキー：id
-			.usernameParameter("username")
-			//ログイン時のパスワード
-			.passwordParameter("password")
-			// ログイン画面は未ログインでもアクセス可能
-			.permitAll() 
-		).logout(logout -> logout
-			//ログアウト時の遷移先
-			.logoutSuccessUrl("/login?logout")
-		).authorizeHttpRequests(authz -> authz
-			// 「/login」はすべて許可
-			.requestMatchers("/login").permitAll()
-			// 他の URL はログイン後のみアクセス可能
-			.anyRequest().authenticated()
-		).exceptionHandling((exceptionHandling) -> exceptionHandling
-			.accessDeniedPage("/error"));
-			return http.build();
+				.formLogin(form -> form
+						//ログイン処理のパス
+						.loginProcessingUrl("/login")
+						//ログインページ
+						.loginPage("/login")
+						//ログインエラー時の遷移先
+						.failureUrl("/login?error")
+						//ログイン成功時の遷移先
+						.defaultSuccessUrl("/menu", true)
+						//ログイン時のキー：id
+						.usernameParameter("username")
+						//ログイン時のパスワード
+						.passwordParameter("password")
+						// ログイン画面は未ログインでもアクセス可能
+						.permitAll())
+				.logout(logout -> logout
+						//ログアウト時の遷移先
+						.logoutSuccessUrl("/login?logout"))
+				.authorizeHttpRequests(authz -> authz
+						// 「/login」と「signUp」はすべて許可
+						.requestMatchers("/login", "/register").permitAll()
+						// 他の URL はログイン後のみアクセス可能
+						.anyRequest().authenticated())
+				.exceptionHandling((exceptionHandling) -> exceptionHandling
+						.accessDeniedPage("/error"));
+		return http.build();
 	}
-    @Bean
-    PasswordEncoder passwordEncoder() {
-    // System.out.println(new BCryptPasswordEncoder().encode("bucho"));
-    return new BCryptPasswordEncoder();
-    }
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		// System.out.println(new BCryptPasswordEncoder().encode("bucho"));
+		return new BCryptPasswordEncoder();
+	}
 }
